@@ -1,0 +1,15 @@
+<input type="file" id="upload">
+<button onclick="convertToGhibli()">Convert</button>
+<img id="output" src="">
+
+<script>
+async function convertToGhibli() {
+    let file = document.getElementById("upload").files[0];
+    let formData = new FormData();
+    formData.append("image", file);
+
+    let response = await fetch("/ghibli-style", { method: "POST", body: formData });
+    let blob = await response.blob();
+    document.getElementById("output").src = URL.createObjectURL(blob);
+}
+</script>
